@@ -5,12 +5,11 @@ describe('Funcionalidade de Registro', () => {
     let userData: CustomerData; 
 
     beforeEach(() => {
-        // Gera um novo conjunto de dados ANTES de cada 'it'
         userData = generateNewCustomerData();
         cy.visit('/');
     });
 
-    it('Deve ser possível cadastrar um novo usuário com dados aleatórios (Faker)', () => {
+    it('Cadastrar novo usuário com sucesso', () => {
         cy.contains('Register').click();
         cy.get('[name="customer.firstName"]').type(userData.firstName);
         cy.get('[name="customer.lastName"]').type(userData.lastName);
@@ -27,5 +26,21 @@ describe('Funcionalidade de Registro', () => {
         cy.get('[value="Register"]').click();
 
         cy.contains('Your account was created successfully. You are now logged in.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário sem preencher todos os campos obrigatórios', () => {
+        cy.contains('Register').click();
+        cy.get('[value="Register"]').click();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('First name is required.').should('be.visible');
+        cy.contains('Last name is required').should('be.visible');
+        cy.contains('Address is required').should('be.visible');
+        cy.contains('City is required.').should('be.visible');
+        cy.contains('State is required.').should('be.visible');
+        cy.contains('Zip Code is required.').should('be.visible');
+        cy.contains('Social Security Number is required.').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
     });
 });
