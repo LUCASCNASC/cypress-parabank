@@ -1,0 +1,9 @@
+// tsconfig.json (ou cypress/tsconfig.json)
+{
+  "compilerOptions": {
+    // ... outras configurações
+    "types": ["cypress", "node"] // Adicione 'cypress' aqui
+  },
+  "include": ["**/*.ts"]
+  // ... outras configurações
+}
