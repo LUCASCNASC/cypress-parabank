@@ -1,11 +1,13 @@
-// cypress.config.ts
 import { defineConfig } from "cypress";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default defineConfig({
   // Configurações E2E
   e2e: {
     // 1. URL Base (Já definida)
-    baseUrl: "https://parabank.parasoft.com",
+    baseUrl: process.env.BASE_URL,
 
     // 2. Timeout Padrão (Já definido)
     defaultCommandTimeout: 30000, 

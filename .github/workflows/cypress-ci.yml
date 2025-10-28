@@ -1,0 +1,54 @@
+# .github/workflows/cypress-ci.yml
+
+# Nome do seu workflow que aparecerá no GitHub Actions
+name: 🧪 Cypress E2E (CI/CD)
+
+# Define os eventos que disparam o workflow
+on:
+  # Roda quando há um push para a branch 'main' ou 'master'
+  push:
+    branches: [ main, master ]
+  # Roda quando há um Pull Request (PR) aberto contra 'main' ou 'master'
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  cypress-run:
+    # Define o ambiente da máquina virtual
+    runs-on: ubuntu-latest
+    
+    # Passos a serem executados
+    steps:
+      # Passo 1: Checa o seu código (checkout)
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+        
+      # Passo 2: Instala o Node.js
+      - name: 🛠️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Use uma versão LTS estável
+          
+      # Passo 3: Instala as dependências (Cypress, TypeScript, Faker, etc.)
+      # 'npm ci' é mais rápido e confiável em CI do que 'npm install'
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # Passo 4: Executa os testes Cypress
+      # Usamos a ação oficial do Cypress, que cuida de dependências do browser
+      - name: 🏃 Run Cypress E2E tests
+        uses: cypress-io/github-action@v6
+        with:
+          # Comando para rodar seus testes (o Cypress usa o 'cypress run' por padrão)
+          # Usa o navegador padrão (Chrome ou Electron) em modo headless
+          command: npx cypress run
+          
+      # Passo 5 (Opcional): Upload de Artefatos (Screenshots e Vídeos)
+      # Se um teste falhar, você terá as evidências
+      - name: 📤 Upload Artifacts (on failure)
+        uses: actions/upload-artifact@v4
+        if: failure() # Executa SOMENTE se o job falhar
+        with:
+          name: cypress-artifacts
+          path: cypress/screenshots
+          # path: cypress/videos # Inclua vídeos se estiver gerando no seu configuração Cypress
