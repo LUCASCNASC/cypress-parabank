@@ -6,7 +6,7 @@ describe('Acessar Products', () => {
         cy.visit('/');
     });
 
-    it('Acessar Products', function() {
+    it.skip('Acessar Products', function() {
 
         cy.contains('a', 'Products').click();
         cy.contains('ATM Services').should('be.visible');

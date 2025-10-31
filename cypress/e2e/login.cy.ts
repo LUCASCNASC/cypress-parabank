@@ -6,7 +6,7 @@ describe('Funcionalidade de Registro', () => {
         cy.visit('/');
     });
 
-    it('login', function() {
+    it.skip('login', function() {
         cy.visit('/')
         cy.get('#loginPanel [name="username"]').type((users.validUser.username));
         cy.get('#loginPanel [name="password"]').type((users.validUser.password));

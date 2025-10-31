@@ -10,7 +10,7 @@ export default defineConfig({
     baseUrl: process.env.BASE_URL,
 
     // 2. Timeout Padrão (Já definido)
-    defaultCommandTimeout: 30000, 
+    defaultCommandTimeout: 5000, 
     
     // 3. Padrão de Arquivos de Teste (specPattern)
     // Garante que o Cypress encontre apenas arquivos .cy.ts na pasta e2e
