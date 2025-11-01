@@ -1,4 +1,8 @@
 import { generateNewCustomerData, CustomerData } from '../utils/dataGenerator';
+import { NewUserPage } from '../pages/NewUserPage';
+import { ne } from '@faker-js/faker/.';
+
+const newUserPage = new NewUserPage();
 
 describe('Funcionalidade de Registro', () => {
 
@@ -9,28 +13,28 @@ describe('Funcionalidade de Registro', () => {
         cy.visit('/');
     });
 
-    it('Cadastrar novo usuário com sucesso', () => {
-        cy.contains('Register').click();
-        cy.get('[name="customer.firstName"]').type(userData.firstName);
-        cy.get('[name="customer.lastName"]').type(userData.lastName);
-        cy.get('[name="customer.address.street"]').type(userData.streetAddress);
-        cy.get('[name="customer.address.city"]').type(userData.city);
-        cy.get('[name="customer.address.state"]').type(userData.state);
-        cy.get('[name="customer.address.zipCode"]').type(userData.zipCode);
-        cy.get('[name="customer.phoneNumber"]').type(userData.phoneNumber);
-        cy.get('[name="customer.ssn"]').type(userData.ssn);
-        cy.get('[name="customer.username"]').type(userData.username);
-        cy.get('[name="customer.password"]').type(userData.password);
-        cy.get('[name="repeatedPassword"]').type(userData.password); // Confirmação de senha
+    it.only('Cadastrar novo usuário com sucesso', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.fillCity(userData.city);
+        newUserPage.fillState(userData.state);
+        newUserPage.fillZipCode(userData.zipCode);
+        newUserPage.fillPhoneNumber(userData.phoneNumber);
+        newUserPage.fillSSN(userData.ssn);
+        newUserPage.fillUsername(userData.username);
+        newUserPage.fillPassword(userData.password);
+        newUserPage.fillPasswordANDRepeatedPassword(userData.password);
         
-        cy.get('[value="Register"]').click();
+        newUserPage.clickConfirmNewUser();
 
         cy.contains('Your account was created successfully. You are now logged in.').should('be.visible');
     });
 
     it('Tentar cadastrar novo usuário sem preencher todos os campos obrigatórios', () => {
-        cy.contains('Register').click();
-        cy.get('[value="Register"]').click();
+        newUserPage.clickRegister();
+        newUserPage.clickConfirmNewUser();
         cy.contains('Signing up is easy!').should('be.visible');
         cy.contains('First name is required.').should('be.visible');
         cy.contains('Last name is required').should('be.visible');
@@ -43,4 +47,170 @@ describe('Funcionalidade de Registro', () => {
         cy.contains('Password is required.').should('be.visible');
         cy.contains('Password confirmation is required.').should('be.visible');
     });
+
+    it('Tentar cadastrar novo usuário apenas com First Name', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('Last name is required').should('be.visible');
+        cy.contains('Address is required').should('be.visible');
+        cy.contains('City is required.').should('be.visible');
+        cy.contains('State is required.').should('be.visible');
+        cy.contains('Zip Code is required.').should('be.visible');
+        cy.contains('Social Security Number is required.').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name e Last Name', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('Address is required').should('be.visible');
+        cy.contains('City is required.').should('be.visible');
+        cy.contains('State is required.').should('be.visible');
+        cy.contains('Zip Code is required.').should('be.visible');
+        cy.contains('Social Security Number is required.').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name, Last Name e Address', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('City is required.').should('be.visible');
+        cy.contains('State is required.').should('be.visible');
+        cy.contains('Zip Code is required.').should('be.visible');
+        cy.contains('Social Security Number is required.').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name, Last Name, Address e City', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.fillCity(userData.city);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('State is required.').should('be.visible');
+        cy.contains('Zip Code is required.').should('be.visible');
+        cy.contains('Social Security Number is required.').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name, Last Name, Address, City e State', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.fillCity(userData.city);
+        newUserPage.fillState(userData.state);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('Zip Code is required.').should('be.visible');
+        cy.contains('Social Security Number is required.').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name, Last Name, Address, City, State e Zip Code', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.fillCity(userData.city);
+        newUserPage.fillState(userData.state);
+        newUserPage.fillZipCode(userData.zipCode);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('Social Security Number is required.').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name, Last Name, Address, City, State, Zip Code e Phone Number', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.fillCity(userData.city);
+        newUserPage.fillState(userData.state);
+        newUserPage.fillZipCode(userData.zipCode);
+        newUserPage.fillPhoneNumber(userData.phoneNumber);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('Social Security Number is required.').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name, Last Name, Address, City, State, Zip Code, Phone Number e Social Security Number', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.fillCity(userData.city);
+        newUserPage.fillState(userData.state);
+        newUserPage.fillZipCode(userData.zipCode);
+        newUserPage.fillPhoneNumber(userData.phoneNumber);
+        newUserPage.fillSSN(userData.ssn);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('Username is required.').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name, Last Name, Address, City, State, Zip Code, Phone Number, Social Security Number e Username', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.fillCity(userData.city);
+        newUserPage.fillState(userData.state);
+        newUserPage.fillZipCode(userData.zipCode);
+        newUserPage.fillPhoneNumber(userData.phoneNumber);
+        newUserPage.fillSSN(userData.ssn);
+        newUserPage.fillUsername(userData.username);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('Password is required.').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+    it('Tentar cadastrar novo usuário apenas com First Name, Last Name, Address, City, State, Zip Code, Phone Number, Social Security Number, Username e Password', () => {
+        newUserPage.clickRegister();
+        newUserPage.fillFirstName(userData.firstName);
+        newUserPage.fillLastName(userData.lastName);
+        newUserPage.fillAddress(userData.streetAddress);
+        newUserPage.fillCity(userData.city);
+        newUserPage.fillState(userData.state);
+        newUserPage.fillZipCode(userData.zipCode);
+        newUserPage.fillPhoneNumber(userData.phoneNumber);
+        newUserPage.fillSSN(userData.ssn);
+        newUserPage.fillUsername(userData.username);
+        newUserPage.fillPassword(userData.password);
+        newUserPage.clickConfirmNewUser();
+        cy.contains('Signing up is easy!').should('be.visible');
+        cy.contains('Password confirmation is required.').should('be.visible');
+    });
+
+   
 });
