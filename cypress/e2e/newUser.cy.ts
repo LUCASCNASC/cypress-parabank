@@ -13,7 +13,7 @@ describe('Funcionalidade de Registro', () => {
         cy.visit('/');
     });
 
-    it.only('Cadastrar novo usuário com sucesso', () => {
+    it('Cadastrar novo usuário com sucesso', () => {
         newUserPage.clickRegister();
         newUserPage.fillFirstName(userData.firstName);
         newUserPage.fillLastName(userData.lastName);
@@ -24,8 +24,8 @@ describe('Funcionalidade de Registro', () => {
         newUserPage.fillPhoneNumber(userData.phoneNumber);
         newUserPage.fillSSN(userData.ssn);
         newUserPage.fillUsername(userData.username);
-        newUserPage.fillPassword(userData.password);
-        newUserPage.fillPasswordANDRepeatedPassword(userData.password);
+        cy.get('[name="customer.password"]').type(userData.password);
+        cy.get('[name="repeatedPassword"]').type(userData.password);
         
         newUserPage.clickConfirmNewUser();
 
