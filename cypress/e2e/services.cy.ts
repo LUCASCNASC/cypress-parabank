@@ -1,5 +1,3 @@
-import users from '../fixtures/users.json';
-
 describe('Acessar Services', () => {
 
     beforeEach(() => {

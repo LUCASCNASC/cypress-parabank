@@ -1,6 +1,5 @@
 import { generateNewCustomerData, CustomerData } from '../utils/dataGenerator';
 import { NewUserPage } from '../pages/NewUserPage';
-import { ne } from '@faker-js/faker/.';
 
 const newUserPage = new NewUserPage();
 
