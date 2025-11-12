@@ -2,15 +2,16 @@ import { LoginPage } from '../pages/LoginPage';
 
 describe('Funcionalidade de Registro', () => {
 
-    beforeEach(() => {
-        cy.visit('/');
-    });
+  const loginPage = new LoginPage(); // ✅ cria instância
 
-    it.skip('login', function() {
-        
-        LoginPage.fillUsername()
-        LoginPage.fillPassword()
-        LoginPage.clickLogin()
-    });
-    
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
+  it.skip('login', () => {
+    loginPage.fillUsername();
+    loginPage.fillPassword();
+    loginPage.clickLogin();
+  });
+
 });

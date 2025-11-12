@@ -1,6 +1,10 @@
-import users from '../fixtures/users.json';
+import { LoginPage } from '../pages/LoginPage';
+import { LogoutPage } from '../pages/LogoutPage';
 
 describe('Funcionalidade de Registro', () => {
+
+    const loginPage = new LoginPage(); // ✅ cria instância
+    const logoutPage = new LogoutPage(); // ✅ cria instância
 
     beforeEach(() => {
         cy.visit('/');
@@ -9,12 +13,10 @@ describe('Funcionalidade de Registro', () => {
     it.skip('login', function() {
         
         cy.visit('/')
-        cy.get('#loginPanel [name="username"]').type((users.validUser.username));
-        cy.get('#loginPanel [name="password"]').type((users.validUser.password));
-        cy.get('#loginPanel input.button').click();
-        cy.contains('Accounts Overview').should('be.visible');
-        cy.get('a[href="logout.htm"]').click();
-        cy.contains('Customer Login').should('be.visible');
+        loginPage.fillUsername();
+        loginPage.fillPassword();
+        loginPage.clickLogin();
+        logoutPage.clickLogout()
     });
     
 });
