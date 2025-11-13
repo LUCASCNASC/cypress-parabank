@@ -1,4 +1,8 @@
+import { AdminPagePage } from '../pages/AdminPagePage';
+
 describe('Acessar Admin Page', () => {
+
+    const adminPagePage = new AdminPagePage(); // ✅ cria instância
 
     beforeEach(() => {
         cy.visit('/');
@@ -6,8 +10,7 @@ describe('Acessar Admin Page', () => {
 
     it('Acessar Admin Page', function() {
 
-        cy.contains('a', 'Admin Page').click();
-        cy.contains('Administration').should('be.visible');
+        adminPagePage.clickAdminPage()
         
     });
     

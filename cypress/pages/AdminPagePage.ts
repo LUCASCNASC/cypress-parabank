@@ -1,9 +1,7 @@
-import { generateNewCustomerData, CustomerData } from '../utils/dataGenerator';
-let userData: CustomerData; 
-
 export class AdminPagePage {
     
-    // clickRegister() {
-    //     cy.contains('Register').click();
-    // }
+    clickAdminPage() {
+        cy.contains('a', 'Admin Page').click();
+        cy.contains('Administration').should('be.visible');
+    }
 }
