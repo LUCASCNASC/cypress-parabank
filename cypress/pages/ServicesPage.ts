@@ -3,7 +3,8 @@ let userData: CustomerData;
 
 export class ServicesPage {
     
-    // clickRegister() {
-    //     cy.contains('Register').click();
-    // }
+    clickServices() {
+        cy.get('a[href="services.htm"]').first().click()
+        cy.contains('Available Bookstore SOAP services:').should('be.visible');
+    }
 }

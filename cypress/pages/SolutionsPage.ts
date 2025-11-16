@@ -3,7 +3,8 @@ let userData: CustomerData;
 
 export class SolutionsPage {
     
-    // clickRegister() {
-    //     cy.contains('Register').click();
-    // }
+    clickSolutions() {
+        cy.contains('li.Solutions', 'Solutions').click()
+        cy.contains('ParaSoft Demo Website').should('be.visible');
+    }
 }

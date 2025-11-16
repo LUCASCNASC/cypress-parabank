@@ -3,7 +3,8 @@ let userData: CustomerData;
 
 export class ProductsPage {
     
-    // clickRegister() {
-    //     cy.contains('Register').click();
-    // }
+    clickProducts() {
+        cy.contains('a', 'Products').click();
+        cy.contains('ATM Services').should('be.visible');
+    }
 }

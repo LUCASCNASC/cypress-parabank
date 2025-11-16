@@ -1,6 +1,9 @@
 import users from '../fixtures/users.json';
+import { LocationsPage } from '../pages/LocationsPage';
 
 describe('Acessar Locations', () => {
+
+    const locationsPage = new LocationsPage(); // ✅ cria instância
 
     beforeEach(() => {
         cy.visit('/');
@@ -8,10 +11,7 @@ describe('Acessar Locations', () => {
 
     it.skip('Acessar Locations', function() {
 
-        //problema para carregar o link via href
-        cy.contains('a', 'Locations').click(); 
-        //cy.contains('Make manual regression testing faster, smarter, and more targeted').should('be.visible');
-        
+        locationsPage.clickLocations();
     });
     
 });

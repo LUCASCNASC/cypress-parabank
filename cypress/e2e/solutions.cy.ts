@@ -1,4 +1,8 @@
+import { SolutionsPage } from '../pages/SolutionsPage';
+
 describe('Acessar Solutions', () => {
+
+    const solutionsPage = new SolutionsPage(); // ✅ cria instância
 
     beforeEach(() => {
         cy.visit('/');
@@ -6,8 +10,7 @@ describe('Acessar Solutions', () => {
 
     it.skip('Acessar Solutions', function() {
 
-        cy.contains('li.Solutions', 'Solutions').click()
-        cy.contains('ParaSoft Demo Website').should('be.visible');
+        solutionsPage.clickSolutions();
         
     });
     

@@ -1,4 +1,8 @@
+import { ServicesPage } from '../pages/ServicesPage';
+
 describe('Acessar Services', () => {
+
+    const servicesPage = new ServicesPage(); // ✅ cria instância
 
     beforeEach(() => {
         cy.visit('/');
@@ -6,8 +10,7 @@ describe('Acessar Services', () => {
 
     it('Acessar Services', function() {
 
-        cy.get('a[href="services.htm"]').first().click()
-        cy.contains('Available Bookstore SOAP services:').should('be.visible');
+        servicesPage.clickServices();
     });
     
 });
