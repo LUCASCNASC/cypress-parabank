@@ -3,25 +3,38 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-module.exports = {
-  projectId: "hnqg5e",
-  // ...rest of the Cypress project config
-}
-
 export default defineConfig({
+  projectId: "hnqg5e",
+
   e2e: {
-    baseUrl: process.env.BASE_URL,
-    defaultCommandTimeout: 5000, 
-    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}', 
-    supportFile: 'cypress/support/e2e.ts',
+    baseUrl: process.env.BASE_URL,   // Ex: https://meusite.com
+    defaultCommandTimeout: 8000,
+    specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
+    supportFile: "cypress/support/e2e.ts",
+
+    // Desabilita bloqueios de CORS e restringe menos
+    chromeWebSecurity: false,
+
+    // Permite visitar sites externos sem bloquear frame/headers
+    experimentalModifyObstructiveThirdPartyCode: true,
+
+    // Aqui você pode registrar tasks, plugins etc
     setupNodeEvents(on, config) {
+      console.log("🌱 Ambiente carregado:");
+      console.log("BASE_URL:", config.env.BASE_URL ?? process.env.BASE_URL);
+
+      // Retornar o config é importante
+      return config;
     },
   },
 
+  // Dimensões do browser
   viewportWidth: 1440,
   viewportHeight: 900,
-  video: false, // Desabilitar por padrão para economizar espaço e tempo
-  videoCompression: 32, // Nível de compressão do vídeo
+
+  video: false,
+  videoCompression: 32,
+
   screenshotOnRunFailure: true,
-  fixturesFolder: 'cypress/fixtures', 
+  fixturesFolder: "cypress/fixtures",
 });
