@@ -1,17 +1,17 @@
-import users from '../fixtures/users.json';
+import users from '../support/users.json';
 
 export class LoginPage {
 
-    fillUsername() {
-        cy.get('#loginPanel [name="username"]').type((users.validUser.username));
+    fillEmail() {
+        cy.get(':nth-child(1) > [name="email"]').type((users.email));
     }
 
     fillPassword() {
-        cy.get('#loginPanel [name="password"]').type((users.validUser.password));
+        cy.get('.style__ContainerFormLogin-sc-1wbjw6k-0 > .login__password > .style__ContainerFieldInput-sc-s3e9ea-0 > [name="password"]').type((users.password));
     }
 
-    clickLogin() {
-        cy.get('#loginPanel input.button').click();
-        cy.contains('Accounts Overview').should('be.visible');
+    clickAcessar() {
+        cy.get('.otUnI').click();
+        //cy.contains('Accounts Overview').should('be.visible');
     }
 }
