@@ -14,6 +14,8 @@ export default defineConfig({
 
     // Desabilita bloqueios de CORS e restringe menos
     chromeWebSecurity: false,
+    modifyObstructiveCode: false,
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122 Safari/537.36",
 
     // Permite visitar sites externos sem bloquear frame/headers
     experimentalModifyObstructiveThirdPartyCode: true,
