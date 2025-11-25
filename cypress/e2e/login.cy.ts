@@ -9,11 +9,31 @@ describe('Funcionalidade de Registro', () => {
     cy.visit('/');
   });
 
-  it('login', () => {
+  it('login sucess', () => {
+
+    loginPage.clickLogin()
+    loginPage.fillEmail(users.email)
+    loginPage.fillPassword(users.password)
+    loginPage.clickSignin()
+    loginPage.validadeLogin()
+  });
+
+  it('login email strong', () => {
     
-    //cy.get('.ico-login').click()
+    loginPage.clickLogin()
+    loginPage.fillEmail(users.email_strong)
+    loginPage.fillPassword(users.password)
+    loginPage.clickSignin()
+    loginPage.validadeEmailStrong()
+  });
+
+  it('login password strong', () => {
     
-    
+    loginPage.clickLogin()
+    loginPage.fillEmail(users.email)
+    loginPage.fillPassword(users.password_strong)
+    loginPage.clickSignin()
+    loginPage.validadePasswordStrong()
   });
 
 });

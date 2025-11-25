@@ -2,16 +2,38 @@ import users from '../support/users.json';
 
 export class LoginPage {
 
-    fillEmail() {
-        cy.get(':nth-child(1) > [name="email"]').type((users.email));
+    clickLogin() {
+        cy.get('.nav-link.desktop').click()
+        cy.contains('Log in to your account').should('be.visible')
     }
 
-    fillPassword() {
-        cy.get('.style__ContainerFormLogin-sc-1wbjw6k-0 > .login__password > .style__ContainerFieldInput-sc-s3e9ea-0 > [name="password"]').type((users.password));
+    fillEmail(email: string) {
+        cy.get('[name="email"]').type(email);
     }
 
-    clickAcessar() {
-        cy.get('.otUnI').click();
-        //cy.contains('Accounts Overview').should('be.visible');
+    fillPassword(password: string) {
+        cy.get('[name="password"]').type(password);
+    }
+
+    clickSignin() {
+        cy.get('.Ipyboe').click();
+    }
+
+    validadeLogin() {
+        // cy.intercept('POST','**/v1/projects/list*').as('projectsList');
+        // cy.wait('@projectsList', { timeout: 40000 });
+        cy.contains('Projects').should('be.visible');
+    }
+
+    validadeEmailStrong() {
+        // cy.intercept('POST','**/v1/projects/list*').as('projectsList');
+        // cy.wait('@projectsList', { timeout: 40000 });
+        cy.contains('These credentials do not match our records.').should('be.visible');
+    }
+
+    validadePasswordStrong() {
+        // cy.intercept('POST','**/v1/projects/list*').as('projectsList');
+        // cy.wait('@projectsList', { timeout: 40000 });
+        cy.contains('These credentials do not match our records.').should('be.visible');
     }
 }

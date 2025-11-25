@@ -1,11 +1,10 @@
 import { generateNewCustomerData, CustomerData } from '../utils/dataGenerator';
 let userData: CustomerData; 
 
-export class NewUserPage {
+export class NewProjectPage {
 
-    //incial
-    clickRegistrar() {
-        cy.get('.ihdmxA').click();
+    clickCreateNewProject() {
+        cy.contains('Create new project').click();
     }
     
     clickRegister() {
