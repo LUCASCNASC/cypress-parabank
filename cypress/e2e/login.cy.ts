@@ -1,7 +1,7 @@
 import { LoginPage } from '../pages/LoginPage';
 import users from '../support/users.json';
 
-describe('Funcionalidade de Registro', () => {
+describe('Login', () => {
 
   const loginPage = new LoginPage(); // ✅ cria instância
 

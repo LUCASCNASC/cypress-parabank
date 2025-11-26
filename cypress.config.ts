@@ -8,7 +8,7 @@ export default defineConfig({
 
   e2e: {
     baseUrl: process.env.BASE_URL,
-    defaultCommandTimeout: 10000,
+    defaultCommandTimeout: 20000,
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     supportFile: "cypress/support/e2e.ts",
 

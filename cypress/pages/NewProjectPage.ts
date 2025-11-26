@@ -7,79 +7,36 @@ export class NewProjectPage {
         cy.contains('Create new project').click();
     }
     
-    clickRegister() {
-        cy.contains('Register').click();
+    fillProjectName() {
+        cy.get('#project-name').type('First Project');
     }
 
-    clickConfirmNewUser() {
-        cy.get('[value="Register"]').click();
+    fillDescription() {
+        cy.get('#description-area').type('Esta é a descrição de um novo projeto.');
     }
 
-    fillFirstName(firstName: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.firstName"]').type(userData.firstName);
+    clickCreateProject() {
+        cy.contains('button', 'Create project').click();
     }
 
-    fillLastName(lastName: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.lastName"]').type(userData.lastName);
+    validateCreatedNewProject() {
+        cy.get('#create-case-button').should('be.visible')
     }
 
-    fillAddress(address: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.address.street"]').type(userData.streetAddress);
+    clickTresPontosProject() {
+        cy.get('svg[data-icon="ellipsis-vertical"]').click()
     }
 
-    fillCity(city: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.address.city"]').type(userData.city);
+    clickRemove() {
+        cy.get('[data-testid="remove"]').click()
+        cy.get('.VNd5UT').should('be.visible')
     }
 
-    fillState(state: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.address.state"]').type(userData.state);
+    clickDeleteProject() {
+        cy.get('span.qc0jO1').click({ force: true });
     }
 
-    fillZipCode(zipCode: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.address.zipCode"]').type(userData.zipCode);
+    validateWithoutProject() {
+        cy.get('Looks like you don’t have any projects yet.').should('be.visible')
     }
-
-    fillPhoneNumber(phoneNumber: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.phoneNumber"]').type(userData.phoneNumber);
-    }
-
-    fillSSN(ssn: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.ssn"]').type(userData.ssn);
-    }
-
-    fillUsername(username: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.username"]').type(userData.username);
-    }
-
-    fillPassword(password: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.password"]').type(userData.password);
-    }
-
-    fillRepeatedPassword(repeatedPassword: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="repeatedPassword"]').type(userData.password); 
-    }
-
-    fillPasswordANDRepeatedPassword(password: string) {
-        userData = generateNewCustomerData();
-        cy.get('[name="customer.password"]').type(userData.password);
-        cy.get('[name="repeatedPassword"]').type(userData.password);
-    }
-
-//   // 🚀 Método de alto nível
-//   login(username: string, password: string) {
-//     this.fillUsername(username);
-//     this.fillPassword(password);
-//     this.submit();
-//   }
 }
