@@ -7,11 +7,15 @@ describe('Login', () => {
 
   beforeEach(() => {
     cy.visit('/');
+    cy.closeInitialMessage();
   });
 
-  it.only('login sucess', () => {
+  it('login sucess', () => {
 
-    
+    loginPage.clickMinhaConta()
+    loginPage.fillEmail(users.validUser.email)
+    loginPage.fillPassword(users.validUser.password)
+    loginPage.clickProsseguir()
   });
 
 

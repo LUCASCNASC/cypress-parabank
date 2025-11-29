@@ -1,42 +1,55 @@
 import { generateNewCustomerData, CustomerData } from '../utils/dataGenerator';
 let userData: CustomerData; 
 
-export class NewProjectPage {
+export class NewRegisterPage {
 
-    clickCreateNewProject() {
-        cy.contains('Create new project').click();
+    clickCadastrar() {
+        cy.get('fieldset > div > .botao').click()
+    }
+
+    fillEmail(email:string) {
+        cy.get('fieldset > div > [name="email"]').type(email)
+    }
+
+    fillConfirmEmail(email:string) {
+        cy.get('[name="confirmacao_email"]').type(email)
+    }
+
+    fillPassword(password:string) {
+        cy.get(':nth-child(1) > [name="senha"]').type(password)
+    }
+
+    fillConfirmPassword(password:string) {
+        cy.get('[name="confirmacao_senha"]').type(password)
+    }
+
+    fillNomeCompleto(nomeCompleto:string) {
+        cy.get('[name="nome"]').type(nomeCompleto)
+    }
+
+    fillCPF(cpf:string) {
+        cy.get('[name="cpf"]').type(cpf)
+    }
+
+    fillCelular(celular:string) {
+        cy.get('[name="telefone_celular"]').type(celular)
+    }
+
+    fillTelefoneFixo(telefoneFixo:string) {
+        cy.get('[name="telefone_principal"]').type(telefoneFixo)
+    }
+
+    selectSexoMasculino() {
+        cy.get('#id_sexo').select('Masculino');
+    }
+
+    selectSexoFeminino() {
+        cy.get('#id_sexo').select('Feminino');
+    }
+
+    fillDataNascimento(dataNascimento:string) {
+        cy.get('[name="data_nascimento"]').type(dataNascimento)
     }
     
-    fillProjectName() {
-        cy.get('#project-name').type('First Project');
-    }
-
-    fillDescription() {
-        cy.get('#description-area').type('Esta é a descrição de um novo projeto.');
-    }
-
-    clickCreateProject() {
-        cy.contains('button', 'Create project').click();
-    }
-
-    validateCreatedNewProject() {
-        cy.get('#create-case-button').should('be.visible')
-    }
-
-    clickTresPontosProject() {
-        cy.get('svg[data-icon="ellipsis-vertical"]').click()
-    }
-
-    clickRemove() {
-        cy.get('[data-testid="remove"]').click()
-        cy.get('.VNd5UT').should('be.visible')
-    }
-
-    clickDeleteProject() {
-        cy.get('span.qc0jO1').click({ force: true });
-    }
-
-    validateWithoutProject() {
-        cy.get('Looks like you don’t have any projects yet.').should('be.visible')
-    }
+    
 }

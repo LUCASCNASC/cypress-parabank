@@ -1,27 +1,44 @@
-import { NewProjectPage } from '../pages/NewProjectPage';
-import { MenuPage } from '../pages/MenuPage';
+import { faker } from '@faker-js/faker';
+import { generateCPF } from '../support/generateCPF'
+import { LoginPage } from '../pages/LoginPage';
+import { NewRegisterPage } from '../pages/NewRegisterPage';
 
-describe('New Project', () => {
+describe('New User', () => {
 
-  const newProjectPage = new NewProjectPage(); // ✅ cria instância
-  const menuPage = new MenuPage(); // ✅ cria instância
+  const loginPage = new LoginPage(); // ✅ cria instância
+  const newRegisterPage = new NewRegisterPage(); // ✅ cria instância
+
+  const email = faker.internet.email();
+  const password = faker.internet.password();
+  const nomeCompleto = faker.person.fullName();
+  const celular = faker.helpers.replaceSymbols('(44) 9####-####');
+  const telefoneFixo = faker.helpers.replaceSymbols('(44) 3###-####');
+  const data = faker.date.birthdate({ min: 18, max: 60, mode: 'age' });
+  const dataNascimento = data.toLocaleDateString('pt-BR')
+  const cpf = generateCPF();
+  
 
   beforeEach(() => {
-    cy.visit('/')
-    cy.login()
+    cy.visit('/');
+    cy.closeInitialMessage();
   });
 
-  it('create new project and delete', () => {
+  it('Create new user - pessoa física', () => {
 
-    newProjectPage.clickCreateNewProject()
-    newProjectPage.fillProjectName()
-    newProjectPage.fillDescription()
-    newProjectPage.clickCreateProject()
-    newProjectPage.validateCreatedNewProject()
-    menuPage.clickProject()
-    newProjectPage.clickTresPontosProject()
-    newProjectPage.clickRemove()
-    //newProjectPage.clickDeleteProject()
-    //newProjectPage.validateWithoutProject()
+    loginPage.clickMinhaConta()
+    newRegisterPage.fillEmail(email)
+    newRegisterPage.clickCadastrar()
+    newRegisterPage.fillConfirmEmail(email)
+    newRegisterPage.fillPassword(password)
+    newRegisterPage.fillConfirmPassword(password)
+    newRegisterPage.fillNomeCompleto(nomeCompleto)
+    newRegisterPage.fillCPF(cpf)
+    newRegisterPage.fillCelular(celular)
+    newRegisterPage.fillTelefoneFixo(telefoneFixo)
+    newRegisterPage.selectSexoMasculino()
+    newRegisterPage.fillDataNascimento(dataNascimento)
+
   });
+
+
 });
