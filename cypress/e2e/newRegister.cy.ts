@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { generateCPF } from '../support/generateCPF'
+import { generateCEP } from '../support/generateCEP'
 import { LoginPage } from '../pages/LoginPage';
 import { NewRegisterPage } from '../pages/NewRegisterPage';
 
@@ -14,8 +15,10 @@ describe('New User', () => {
   const celular = faker.helpers.replaceSymbols('(44) 9####-####');
   const telefoneFixo = faker.helpers.replaceSymbols('(44) 3###-####');
   const data = faker.date.birthdate({ min: 18, max: 60, mode: 'age' });
-  const dataNascimento = data.toLocaleDateString('pt-BR')
+  const dataNascimento = data.toLocaleDateString('pt-BR');
+  const numeroResidencia = faker.number.int({ min: 1, max: 999 });
   const cpf = generateCPF();
+  const CEP = generateCEP();
   
 
   beforeEach(() => {
@@ -37,6 +40,11 @@ describe('New User', () => {
     newRegisterPage.fillTelefoneFixo(telefoneFixo)
     newRegisterPage.selectSexoMasculino()
     newRegisterPage.fillDataNascimento(dataNascimento)
+    newRegisterPage.fillCEP(CEP)
+    newRegisterPage.fillNumeroResidencia(numeroResidencia)
+    newRegisterPage.fillComplemento()
+    newRegisterPage.fillReferencia()
+    newRegisterPage.clickCriarConta()
 
   });
 
