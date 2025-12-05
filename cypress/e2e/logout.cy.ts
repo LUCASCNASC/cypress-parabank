@@ -1,5 +1,4 @@
 import { LogoutPage } from '../pages/LogoutPage';
-import users from '../support/users.json';
 
 describe('Logout', () => {
 
@@ -15,6 +14,5 @@ describe('Logout', () => {
 
     logoutPage.clickSair()
   });
-
 
 });

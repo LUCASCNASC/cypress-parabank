@@ -1,4 +1,4 @@
-import { generateNewCustomerData, CustomerData } from '../utils/dataGenerator';
+import { CustomerData } from '../utils/dataGenerator';
 let userData: CustomerData; 
 
 export class NewRegisterPage {
@@ -17,7 +17,7 @@ export class NewRegisterPage {
         cy.get('fieldset > div > [name="email"]').type(email)
     }
 
-    fillConfirmEmail(email:string) {
+    fillConfirmEmail() {
         cy.get('.controls > [name="email"]')
             .invoke('val')
             .then((email) => {

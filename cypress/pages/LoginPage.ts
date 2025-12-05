@@ -14,8 +14,33 @@ export class LoginPage {
 
     clickProsseguir() {
         cy.get('.controls > .botao').click()
+    }
+
+    validateLoginSuccess() {
         cy.get('.nome-usuario').should('be.visible')
     }
 
-    
+    validateEmailStrong() {
+        cy.get('.alert-danger')
+            .should('be.visible')
+            .and('contain', 'Não foi possível entrar pois o email ou senha não conferem. Por favor tente novamente com outro email ou senha.')
+    }
+
+    validatePasswordStrong() {
+        cy.get('.alert-danger')
+            .should('be.visible')
+            .and('contain', 'Não foi possível entrar pois o email ou senha não conferem. Por favor tente novamente com outro email ou senha.')
+    }
+
+    validateEmailEmpty() {
+        cy.get('.alert-danger')
+            .should('be.visible')
+            .and('contain', 'Não foi possível entrar pois o email ou senha não conferem. Por favor tente novamente com outro email ou senha.')
+    }
+
+    validatePasswordEmpty() {
+        cy.get('.alert-danger')
+            .should('be.visible')
+            .and('contain', 'Não foi possível entrar pois o email ou senha não conferem. Por favor tente novamente com outro email ou senha.')
+    } 
 }
